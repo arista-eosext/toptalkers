@@ -200,13 +200,14 @@ Its best to be conservative in your values if you choose to over ride the defaul
 
 
 To send sflow samples to the local collector, define the loopback as one of the sflow targets.
+```
 !
 sflow sample 5000 #Whatever is appropriate for your use case 
 sflow destination 127.0.0.1
 sflow source-interface Vlan10 #Whatever is appropriate for your use case
 sflow run
 !
-
+```
 
 So, now your collector should be running and collecting sflow samples. How do you view this data that is being collected? This extension adds a new 
 new CliPlugin 'show toptalkers' that does this. Please note, because of the EOS CliPlugin framework, you must do a 'bash sudo killall ConfigAgent'
