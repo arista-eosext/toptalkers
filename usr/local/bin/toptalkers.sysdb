@@ -1,0 +1,4 @@
+agentName:toptalkers-%sliceId
+
+Include: EosSdk_agent.include
+Include: EosSdk_system.include
