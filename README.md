@@ -217,7 +217,7 @@ If you reboot the switch and the RPM is also in boot-extensions, then you do NOT
 # LIMITATIONS:
 This release has been tested on EOS 4.20.1, 4.20.10, 4.21.2. Please test this extension on future releases of EOS before using this in production as this has 
 specific target compiled binaries for these specific EOS releases and may change in the future.
-Also, this release has not been tested on MLAG or multi-supervisor platforms.
+Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.
 
 # FILE STRUCTURE DETAIL:
 Most of the following detail can be ignored if you are installing toptalkers from the included RPM. The details below are included for those that may want to modify
