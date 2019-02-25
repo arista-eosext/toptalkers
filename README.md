@@ -209,9 +209,10 @@ sflow run
 !
 ```
 
-So, now your collector should be running and collecting sflow samples. How do you view this data that is being collected? This extension adds a new 
-new CliPlugin 'show toptalkers' that does this. Please note, because of the EOS CliPlugin framework, you must do a 'bash sudo killall ConfigAgent'
-in order for the new plugin to be registered. This will cause your current CLI session to terminate, so you'll have to log back into the switch.
+So, now your collector should be running and collecting sflow samples. How do you view this data that is being collected? 
+This extension adds a new CliPlugin 'show toptalkers' which does this. 
+Please note, because of the EOS CliPlugin framework, you must do a **'bash sudo killall ConfigAgent'**
+in order for the new plugin to be registered. This will cause your *current* CLI session to terminate, so you'll have to log back into the switch.
 If you reboot the switch and the RPM is also in boot-extensions, then you do NOT need to kill ConfigAgent as the CLI Extension is registered after a reboot.
 
 # LIMITATIONS:
