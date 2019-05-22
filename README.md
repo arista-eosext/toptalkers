@@ -171,8 +171,7 @@ A: available | NA: not available | I: installed | NI: not installed | F: forced
 AristaSwitch#copy installed-extensions boot-extensions
 ```
 
-
-Add the following configuration snippets to change the default behavior.
+5. Add the following configuration snippets to change the default behavior.
 ```
 !
 daemon toptalkers
@@ -214,6 +213,16 @@ This extension adds a new CliPlugin 'show toptalkers' which does this.
 Please note, because of the EOS CliPlugin framework, you must do a **'bash sudo killall ConfigAgent'**
 in order for the new plugin to be registered. This will cause your *current* CLI session to terminate, so you'll have to log back into the switch.
 If you reboot the switch and the RPM is also in boot-extensions, then you do NOT need to kill ConfigAgent as the CLI Extension is registered after a reboot.
+
+
+# Upgrading
+If upgrading from a previous release:
+
+1. Shutdown the daemon first by issuing a 'shutdown' under the 'daemon toptalkers' configuration hierarchy.
+2. Remove old extension by issuing a 'no extension <old release name>'
+3. Delete the old extension by using 'delete extension <old release name>'
+4. Follow steps 1-4 in above installation instructions.
+
 
 # LIMITATIONS:
 This release has been tested on EOS 4.20.1, 4.20.10, 4.21.2. Please test this extension on future releases of EOS **before** using this in production as this has 

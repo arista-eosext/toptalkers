@@ -7,7 +7,7 @@ from prettytable import PrettyTable
 #=========
 DB = "/tmp/sampling.db"
 
-query = '''SELECT ip_src as key, ip_dst, SUM(bytes), SUM(packets), ip_proto, src_port, dst_port, tos
+query = '''SELECT ip_src as key, ip_dst, vlan, iface_in, SUM(bytes), SUM(packets), ip_proto, src_port, dst_port, tos
 from acct_v5
 GROUP by ip_src,ip_dst
 ORDER BY SUM(bytes) DESC LIMIT 50;
@@ -24,7 +24,7 @@ rows = db.execute(query).fetchall()
 
 
 #Create Table Headers
-table = PrettyTable(['Src IP', 'Dest IP', 'Total Bytes', 'Total Packets', 'Protocol', 'Src Port', 'Dst Port', 'TOS'])
+table = PrettyTable(['Src IP', 'Dest IP', 'VLAN','In Intf','Total Bytes', 'Total Packets', 'Protocol', 'Src Port', 'Dst Port', 'TOS'])
 
 #Store all entries in a list that way we can parse and make it pretty 
 for x in rows:
