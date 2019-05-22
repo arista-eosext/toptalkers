@@ -219,8 +219,8 @@ If you reboot the switch and the RPM is also in boot-extensions, then you do NOT
 If upgrading from a previous release:
 
 1. Shutdown the daemon first by issuing a 'shutdown' under the 'daemon toptalkers' configuration hierarchy.
-2. Remove old extension by issuing a 'no extension <old release name>'
-3. Delete the old extension by using 'delete extension <old release name>'
+2. Remove old extension by issuing a 'no extension \<*old-rpm-name*\>'
+3. Delete the old extension by using 'delete extension \<*old-rpm-name*\>'
 4. Follow steps 1-4 in above installation instructions.
 
 
