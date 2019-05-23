@@ -243,7 +243,7 @@ the sqlite db path resides.
 The actual database is /tmp/sampling.db. On Arista platforms, /tmp is limited in space because it is in RAM. Therefore, several exception handling routines are used 
 to address this space constraint. It also means that users need to be careful in how high of a sample rate they are using coupled with the retention times configured. 
 If space becomes unavailable, we use the sledgehammer approach and just remove the database file and build a new empty one. This is not ideal, but it is the most
-stabile approach to deal with the limited disk space.
+stable approach to deal with the limited disk space.
 
 The TopTalkersCli.py is the CliPlugin that extends the EOS CLI to provide the 'show toptalkers' command. This file is copied over to the /usr/lib/python2.7/site-packages/CliPlugin/
 directory.
