@@ -216,9 +216,13 @@ in order for the new plugin to be registered. This will cause your *current* CLI
 If you reboot the switch and the RPM is also in boot-extensions, then you do NOT need to kill ConfigAgent as the CLI Extension is registered after a reboot.
 
 # LIMITATIONS:
-This release has been tested on EOS 4.20.1, 4.20.10, 4.21.2. Please test this extension on future releases of EOS **before** using this in production as this has 
-specific target compiled binaries for these specific EOS releases and may change in the future.
-Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.
+This release has been tested on EOS 4.20.1, 4.20.10, 4.21.2.  
+Please test this extension on future releases of EOS **before** using this in production as this has  
+specific target compiled binaries for these specific EOS releases and may change in the future.  
+Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.  
+
+Based on licensing, this is Open Source and this and other Open Source tools are not supported directly by  
+Arista Support. Support is best effort as it relates to extensions such as this one.  
 
 # FILE STRUCTURE DETAIL:
 Most of the following detail can be ignored if you are installing toptalkers from the included RPM. The details below are included for those that may want to modify
