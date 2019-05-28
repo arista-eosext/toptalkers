@@ -230,7 +230,7 @@ If upgrading from a previous release:
 
 
 # LIMITATIONS:
-This release has been tested on EOS 4.20.1, 4.20.10, 4.21.2.  
+This release has been tested on EOS 4.20.1, 4.20.10, 4.20.12M, 4.21.2, 4.22.0F.  
 Please test this extension on future releases of EOS **before** using this in production as this has  
 specific target compiled binaries for these specific EOS releases and may change in the future.  
 Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.  
