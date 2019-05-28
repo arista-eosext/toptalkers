@@ -19,10 +19,10 @@ some local sampling and providing that data natively in the switch CLI. The Topt
 that some network operators like to have readily available.
 
 # New Features
-Added in this release is parsing sFlow samples VLAN and Ingress Interface information and adding this to the database and output of the  
+Added in this release is parsing sFlow samples VLAN and Ingress Interface information and adding this to the database and output of the 
 'show toptalkers' command.
 
-Additionally, all sampled flows can now be displayed by by using the 'all' keyword with 'show toptalkers all'. Without the  
+Additionally, all sampled flows can now be displayed by by using the 'all' keyword with 'show toptalkers all'. Without the 
 'all' parameter, only the top 50 flows are displayed.
 
 ## Example
