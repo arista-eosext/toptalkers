@@ -18,6 +18,11 @@ Although centralized sflow collection is the typical deployment model in most la
 some local sampling and providing that data natively in the switch CLI. The Toptalker extension satisfies the latter requirement
 that some network operators like to have readily available.
 
+# New Features
+Added in this release is parsing sFlow samples with VLAN and ingress Interface information and adding this to the database and output of the 'show toptalkers' command.
+
+Additionally, all sampled flows can now be displayed by by using the 'all' keyword with 'show toptalkers all'. Without the 
+'all' parameter, only the top 50 flows are displayed.
 
 ## Example
 
@@ -46,60 +51,60 @@ Status:                Administratively Up
 ```
 Arista7010T-IDF#show toptalkers
 Querying for Top Talkers. Please wait...
-+-----------------+-----------------+-------------+---------------+----------+----------+----------+-----+
-|      Src IP     |     Dest IP     | Total Bytes | Total Packets | Protocol | Src Port | Dst Port | TOS |
-+-----------------+-----------------+-------------+---------------+----------+----------+----------+-----+
-| 192.168.100.100 |  192.168.100.2  |   37455540  |     551629    |   udp    |   1000   |   2468   | 100 |
-| 192.168.100.212 | 192.168.100.130 |   35569323  |     56511     |   tcp    |  59360   |   9910   |  0  |
-| 192.168.100.213 | 192.168.100.130 |   32874185  |     51718     |   tcp    |  45081   |   9910   |  0  |
-| 192.168.100.210 | 192.168.100.130 |   29221435  |     51813     |   tcp    |  57695   |   9910   |  0  |
-| 192.168.100.214 | 192.168.100.130 |   16937319  |     30916     |   tcp    |  46825   |   9910   |  0  |
-| 192.168.100.201 | 192.168.100.130 |   11333329  |     25699     |   tcp    |  45414   |   9910   |  0  |
-| 192.168.100.200 | 192.168.100.130 |   11155341  |     25742     |   tcp    |  45151   |   9910   |  0  |
-| 192.168.100.130 |  192.168.100.2  |   7780697   |     82866     |   tcp    |   9910   |  57707   |  0  |
-| 208.111.155.246 |    10.0.0.117   |   7386345   |      5240     |   tcp    |   443    |  49803   |  32 |
-|   13.107.4.50   |    10.0.0.97    |   5789445   |      3824     |   tcp    |    80    |  61184   |  32 |
-| 192.168.100.130 | 192.168.100.212 |   3453404   |     31008     |   tcp    |   9910   |  59360   |  0  |
-| 192.168.100.130 | 192.168.100.210 |   3329091   |     29852     |   tcp    |   9910   |  57695   |  0  |
-| 192.168.100.130 | 192.168.100.213 |   3162380   |     28383     |   tcp    |   9910   |  45081   |  0  |
-|    10.0.0.36    |     10.0.0.2    |   3088428   |      4023     |   tcp    |   3557   |   8081   |  0  |
-| 192.168.100.130 | 192.168.100.214 |   1858118   |     16177     |   tcp    |   9910   |  46825   |  0  |
-| 192.168.100.130 | 192.168.100.201 |   1750823   |     15448     |   tcp    |   9910   |  45414   |  0  |
-| 192.168.100.130 | 192.168.100.200 |   1731280   |     15196     |   tcp    |   9910   |  45151   |  0  |
-|     10.0.0.1    |     10.0.0.2    |   1347338   |      3347     |   udp    |  29602   |   514    |  0  |
-|    10.0.0.20    |     10.0.0.2    |   1328215   |      3248     |   udp    |   5406   |  10650   |  0  |
-|     10.0.0.2    |    10.0.0.254   |    948034   |      1646     |   icmp   |    0     |    0     | 192 |
-|  172.217.14.206 |    10.0.0.117   |    743127   |      738      |   tcp    |   443    |  49537   |  32 |
-|    10.0.0.131   |    10.0.0.133   |    611671   |      8451     |   tcp    |  37252   |  55443   |  0  |
-|    10.0.0.133   |    10.0.0.131   |    595071   |      8278     |   tcp    |  55443   |  37249   |  0  |
-|     10.0.0.2    |    10.0.0.20    |    578733   |      1352     |   icmp   |    0     |    0     | 192 |
-|  216.58.194.174 |    10.0.0.117   |    559302   |      757      |   udp    |   443    |  52222   |  32 |
-|    10.0.0.132   |    10.0.0.133   |    546728   |      8157     |   udp    |  55444   |  55444   |  0  |
-|    10.0.0.134   |    10.0.0.133   |    545017   |      8073     |   udp    |  55444   |  55444   |  0  |
-|    10.0.0.130   |    10.0.0.133   |    533584   |      8046     |   udp    |  55444   |  55444   |  0  |
-|    10.0.0.133   |    10.0.0.134   |    532320   |      8027     |   udp    |  55444   |  55444   |  0  |
-|    10.0.0.133   |    10.0.0.132   |    530390   |      7931     |   udp    |  55444   |  55444   |  0  |
-|    10.0.0.18    |     10.0.0.2    |    527984   |      1152     |   tcp    |  52516   |   8081   |  0  |
-|    10.0.0.133   |    10.0.0.130   |    519926   |      7891     |   udp    |  55444   |  55444   |  0  |
-|    10.0.0.19    |     10.0.0.2    |    509936   |      1166     |   tcp    |  60831   |   8081   |  0  |
-|  172.217.14.197 |    10.0.0.114   |    426474   |      375      |   tcp    |   443    |  60528   |  32 |
-|    10.0.0.117   |  54.241.186.124 |    364887   |      1933     |   tcp    |  63725   |   443    |  0  |
-|  192.168.101.2  |  192.168.101.1  |    314446   |      2961     |   tcp    |  55842   |   443    |  0  |
-|  192.168.101.1  |  192.168.101.2  |    306868   |      2904     |   tcp    |  36617   |   443    |  0  |
-| 216.115.100.123 |    10.0.0.114   |    305455   |      232      |   tcp    |   443    |  46560   |  32 |
-|     10.0.0.2    |    10.0.0.36    |    289362   |      3642     |   tcp    |   8081   |   3556   |  0  |
-|    10.0.0.29    |     10.0.0.2    |    276796   |      3952     |   tcp    |    80    |  43438   |  0  |
-|  172.217.14.197 |    10.0.0.117   |    270631   |      389      |   tcp    |   443    |  49496   |  32 |
-|     0.0.0.0     | 255.255.255.255 |    268538   |      651      |   udp    |    68    |    67    |  0  |
-|  216.58.194.165 |    10.0.0.117   |    263390   |      582      |   tcp    |   443    |  49836   |  32 |
-|    10.0.0.117   | 208.111.155.246 |    262659   |      2518     |   tcp    |  49803   |   443    |  0  |
-|    10.0.0.117   |  216.58.194.165 |    261276   |      626      |   tcp    |  49836   |   443    |  0  |
-|     10.0.0.2    |    10.0.0.31    |    251118   |      813      |   icmp   |    0     |    0     | 192 |
-|     10.0.0.2    |    10.0.0.42    |    248114   |      431      |   tcp    |   3128   |  54054   |  0  |
-|  172.231.0.100  |    10.0.0.117   |    241440   |      160      |   tcp    |   443    |  49795   |  32 |
-|     10.0.0.2    |    10.0.0.33    |    232924   |      743      |   icmp   |    0     |    0     | 192 |
-|    10.0.0.33    |     10.0.0.2    |    225922   |      788      |   udp    |   2250   |  43251   |  0  |
-+-----------------+-----------------+-------------+---------------+----------+----------+----------+-----+
++-----------------+-----------------+------+---------+-------------+---------------+----------+----------+----------+-----+
+|      Src IP     |     Dest IP     | VLAN | In Intf | Total Bytes | Total Packets | Protocol | Src Port | Dst Port | TOS |
++-----------------+-----------------+------+---------+-------------+---------------+----------+----------+----------+-----+
+|    10.0.0.34    |     10.0.0.2    |  10  |    1    |    500459   |      458      |   tcp    |   4136   |    20    |  0  |
+| 192.168.100.214 | 192.168.100.130 | 192  |    2    |    209820   |      387      |   tcp    |  50403   |   9910   |  0  |
+| 192.168.100.221 | 192.168.100.130 | 192  |    2    |    196321   |      515      |   tcp    |  58156   |   9910   |  0  |
+| 192.168.100.200 | 192.168.100.130 | 192  |    2    |    107088   |      264      |   tcp    |  40914   |   9910   |  0  |
+| 192.168.100.201 | 192.168.100.130 | 192  |    2    |    93319    |      286      |   tcp    |  46060   |   9910   |  0  |
+| 192.168.100.130 |  192.168.100.2  | 192  |    5    |    89938    |      925      |   tcp    |   9910   |  50002   |  0  |
+|  192.168.100.17 | 192.168.100.130 | 192  |    14   |    54921    |      282      |   tcp    |  36080   |   9910   |  0  |
+|  192.168.100.5  | 192.168.100.130 | 192  |    14   |    54620    |      277      |   tcp    |  36156   |   9910   |  0  |
+|  192.168.100.16 | 192.168.100.130 | 192  |    14   |    54103    |      284      |   tcp    |  33020   |   9910   |  0  |
+|  192.168.100.13 | 192.168.100.130 | 192  |    14   |    53652    |      271      |   tcp    |  45598   |   9910   |  0  |
+|  192.168.100.19 | 192.168.100.130 | 192  |    14   |    53375    |      255      |   tcp    |  56948   |   9910   |  0  |
+|  192.168.100.15 | 192.168.100.130 | 192  |    14   |    53199    |      260      |   tcp    |  60290   |   9910   |  0  |
+|  192.168.100.7  | 192.168.100.130 | 192  |    14   |    53147    |      260      |   tcp    |  49976   |   9910   |  0  |
+|  192.168.100.20 | 192.168.100.130 | 192  |    14   |    53106    |      263      |   tcp    |  60706   |   9910   |  0  |
+|  192.168.100.14 | 192.168.100.130 | 192  |    14   |    52175    |      259      |   tcp    |  36318   |   9910   |  0  |
+|  192.168.100.18 | 192.168.100.130 | 192  |    14   |    51049    |      258      |   tcp    |  38804   |   9910   |  0  |
+|  192.168.100.12 | 192.168.100.130 | 192  |    14   |    50394    |      233      |   tcp    |  53084   |   9910   |  0  |
+|  192.168.100.9  | 192.168.100.130 | 192  |    14   |    49447    |      238      |   tcp    |  42466   |   9910   |  0  |
+|  192.168.100.8  | 192.168.100.130 | 192  |    14   |    48891    |      233      |   tcp    |  60464   |   9910   |  0  |
+|  192.168.100.10 | 192.168.100.130 | 192  |    14   |    46957    |      211      |   tcp    |  51130   |   9910   |  0  |
+|  192.168.100.6  | 192.168.100.130 | 192  |    14   |    46925    |      203      |   tcp    |  39074   |   9910   |  0  |
+|  192.168.100.11 | 192.168.100.130 | 192  |    14   |    44335    |      176      |   tcp    |  52474   |   9910   |  0  |
+| 192.168.100.130 | 192.168.100.221 | 192  |    5    |    38670    |      345      |   tcp    |   9910   |  58156   |  0  |
+|     10.0.0.2    |    10.0.0.34    |  10  |    11   |    28781    |      381      |   tcp    |    20    |   4136   |  8  |
+|   50.126.87.18  |    10.0.0.114   |  10  |    1    |    27356    |       30      |   tcp    |   8022   |  54848   |  32 |
+| 192.168.100.130 | 192.168.100.214 | 192  |    5    |    24469    |      217      |   tcp    |   9910   |  50403   |  0  |
+| 192.168.100.130 |  192.168.100.16 | 192  |    5    |    22959    |      180      |   tcp    |   9910   |  33020   |  0  |
+|  54.153.116.159 |    10.0.0.117   |  10  |    1    |    22716    |       42      |   tcp    |   443    |  59651   |  32 |
+| 192.168.100.130 |  192.168.100.17 | 192  |    5    |    22625    |      176      |   tcp    |   9910   |  36080   |  0  |
+| 192.168.100.130 |  192.168.100.5  | 192  |    5    |    22277    |      174      |   tcp    |   9910   |  36156   |  0  |
+| 192.168.100.130 |  192.168.100.13 | 192  |    5    |    21760    |      170      |   tcp    |   9910   |  45598   |  0  |
+|     10.0.0.1    |     10.0.0.2    |  10  |    1    |    21674    |       50      |   udp    |  58491   |   514    |  0  |
+| 192.168.100.130 |  192.168.100.20 | 192  |    5    |    21664    |      171      |   tcp    |   9910   |  60706   |  0  |
+| 192.168.100.130 |  192.168.100.7  | 192  |    5    |    21427    |      169      |   tcp    |   9910   |  49976   |  0  |
+| 192.168.100.130 |  192.168.100.18 | 192  |    5    |    21346    |      169      |   tcp    |   9910   |  38804   |  0  |
+| 192.168.100.130 |  192.168.100.15 | 192  |    5    |    21124    |      166      |   tcp    |   9910   |  60290   |  0  |
+| 192.168.100.130 |  192.168.100.14 | 192  |    5    |    20864    |      163      |   tcp    |   9910   |  36318   |  0  |
+| 192.168.100.130 | 192.168.100.201 | 192  |    5    |    20743    |      179      |   tcp    |   9910   |  46060   |  0  |
+| 192.168.100.130 |  192.168.100.9  | 192  |    5    |    20578    |      167      |   tcp    |   9910   |  42466   |  0  |
+| 192.168.100.130 |  192.168.100.19 | 192  |    5    |    20510    |      160      |   tcp    |   9910   |  56948   |  0  |
+| 192.168.100.130 | 192.168.100.200 | 192  |    5    |    20133    |      182      |   tcp    |   9910   |  40914   |  0  |
+| 192.168.100.130 |  192.168.100.12 | 192  |    5    |    19585    |      154      |   tcp    |   9910   |  53084   |  0  |
+| 192.168.100.130 |  192.168.100.8  | 192  |    5    |    19164    |      151      |   tcp    |   9910   |  60464   |  0  |
+|  17.252.226.85  |    10.0.0.117   |  10  |    1    |    18866    |       33      |   tcp    |   443    |  59647   |  32 |
+|    10.0.0.20    |     10.0.0.2    |  10  |    1    |    17803    |       43      |   udp    |   5288   |  43089   |  0  |
+| 192.168.100.130 |  192.168.100.10 | 192  |    5    |    17285    |      136      |   tcp    |   9910   |  51130   |  0  |
+| 192.168.100.130 |  192.168.100.6  | 192  |    5    |    17115    |      136      |   tcp    |   9910   |  39074   |  0  |
+|    10.0.0.20    |     10.0.0.3    |  10  |    1    |    15162    |       36      |   udp    |   5162   |  54784   |  0  |
+| 192.168.100.130 |  192.168.100.11 | 192  |    5    |    14689    |      117      |   tcp    |   9910   |  52474   |  0  |
+|     10.0.0.2    |    10.0.0.254   |  10  |    11   |    14154    |       25      |   icmp   |    0     |    0     | 192 |
++-----------------+-----------------+------+---------+-------------+---------------+----------+----------+----------+-----+
 ```
 
 
@@ -148,12 +153,12 @@ toptalkers with the RPM. The RPM includes all the TopTalker support files, sfacc
 
 1. Copy the latest toptalker RPM to extensions: 
 ```
-e.g. copy http://a-server-somewhere/toptalkers-1.4.0-1.i386.rpm extension:
+e.g. copy http://a-server-somewhere/toptalkers-1.5.0-1.i386.rpm extension:
 ```
 
 2. Install extension
 ```
-AristaSwitch#extension toptalkers-1.4.0-1.i386.rpm
+AristaSwitch#extension toptalkers-1.5.0-1.i386.rpm
 ```
 
 3. Verify
@@ -171,8 +176,7 @@ A: available | NA: not available | I: installed | NI: not installed | F: forced
 AristaSwitch#copy installed-extensions boot-extensions
 ```
 
-
-Add the following configuration snippets to change the default behavior.
+5. Add the following configuration snippets to change the default behavior.
 ```
 !
 daemon toptalkers
@@ -215,14 +219,32 @@ Please note, because of the EOS CliPlugin framework, you must do a **'bash sudo 
 in order for the new plugin to be registered. This will cause your *current* CLI session to terminate, so you'll have to log back into the switch.
 If you reboot the switch and the RPM is also in boot-extensions, then you do NOT need to kill ConfigAgent as the CLI Extension is registered after a reboot.
 
+
+# Upgrading
+If upgrading from a previous release:
+
+1. Shutdown the daemon first by issuing a 'shutdown' under the 'daemon toptalkers' configuration hierarchy.
+2. Remove old extension by issuing a 'no extension \<*old-rpm-name*\>'
+3. Delete the old extension by using 'delete extension \<*old-rpm-name*\>'
+4. Follow steps 1-4 in above installation instructions.
+
+
 # LIMITATIONS:
+<<<<<<< HEAD
 This release has been tested on EOS 4.20.1, 4.20.10, 4.21.2.  
+=======
+This release has been tested on EOS 4.20.1, 4.20.10, 4.20.12M, 4.21.2, 4.22.0F.  
+>>>>>>> 1.5
 Please test this extension on future releases of EOS **before** using this in production as this has  
 specific target compiled binaries for these specific EOS releases and may change in the future.  
 Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.  
 
 Based on licensing, this is Open Source and this and other Open Source tools are not supported directly by  
+<<<<<<< HEAD
 Arista Support. Support is best effort as it relates to extensions such as this one.  
+=======
+Arista Support. Support is best effort as it relates to extensions such as this one.
+>>>>>>> 1.5
 
 # FILE STRUCTURE DETAIL:
 Most of the following detail can be ignored if you are installing toptalkers from the included RPM. The details below are included for those that may want to modify
@@ -238,7 +260,7 @@ the sqlite db path resides.
 The actual database is /tmp/sampling.db. On Arista platforms, /tmp is limited in space because it is in RAM. Therefore, several exception handling routines are used 
 to address this space constraint. It also means that users need to be careful in how high of a sample rate they are using coupled with the retention times configured. 
 If space becomes unavailable, we use the sledgehammer approach and just remove the database file and build a new empty one. This is not ideal, but it is the most
-stabile approach to deal with the limited disk space.
+stable approach to deal with the limited disk space.
 
 The TopTalkersCli.py is the CliPlugin that extends the EOS CLI to provide the 'show toptalkers' command. This file is copied over to the /usr/lib/python2.7/site-packages/CliPlugin/
 directory.

@@ -47,7 +47,7 @@ daemon toptalkers
 --MAXFILESIZE is the max file size in bytes of the database before clean up occurs.
   Default value is 50,000,000 (50MB)
 --HOURSOLD is the time in hours to use to clean up old entries. Default is 12 hours
-  which means that when MAXFILESIZE is reached, all entries older than HOURSOLD 
+  which means that when MAXFILESIZE is reached, all entries older than HOURSOLD
   will be deleted and sqlite db will execute VACUUM to reduce file size.
 --CHECKINTERVAL is the time in seconds in which toptalker agent will check the file
   size of the database. Default time is 1800 seconds (30min).
@@ -64,6 +64,7 @@ daemon toptalkers
 #                                                                   to LOCAL4 so logs show up in EOS logs.
 #                                                                   Added better exception handling.
 #
+# Version 1.5.0  - 5/22/2018 - J. Georges - jgeorges@arista.com -- Added vlan and input interface
 #*************************************************************************************
 #
 #TODO - future possible changes:
@@ -334,6 +335,7 @@ CREATE TABLE acct_v5 (
 	mac_src CHAR(17) NOT NULL DEFAULT '0:0:0:0:0:0',
 	mac_dst CHAR(17) NOT NULL DEFAULT '0:0:0:0:0:0',
 	vlan INT(4) NOT NULL DEFAULT 0,
+    iface_in INT(4) NOT NULL DEFAULT 0,
 	ip_src CHAR(15) NOT NULL DEFAULT '0.0.0.0',
 	ip_dst CHAR(15) NOT NULL DEFAULT '0.0.0.0',
 	src_port INT(4) NOT NULL DEFAULT 0,
@@ -345,7 +347,7 @@ CREATE TABLE acct_v5 (
 	flows INT NOT NULL DEFAULT 0,
 	stamp_inserted DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 	stamp_updated DATETIME,
-	PRIMARY KEY (agent_id, class_id, mac_src, mac_dst, vlan, ip_src, ip_dst, src_port, dst_port, ip_proto, tos, stamp_inserted)
+	PRIMARY KEY (agent_id, class_id, mac_src, mac_dst, vlan, iface_in, ip_src, ip_dst, src_port, dst_port, ip_proto, tos, stamp_inserted)
 );
 """
         try:
