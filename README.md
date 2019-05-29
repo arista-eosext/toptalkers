@@ -230,21 +230,14 @@ If upgrading from a previous release:
 
 
 # LIMITATIONS:
-<<<<<<< HEAD
-This release has been tested on EOS 4.20.1, 4.20.10, 4.21.2.  
 =======
 This release has been tested on EOS 4.20.1, 4.20.10, 4.20.12M, 4.21.2, 4.22.0F.  
->>>>>>> 1.5
 Please test this extension on future releases of EOS **before** using this in production as this has  
 specific target compiled binaries for these specific EOS releases and may change in the future.  
 Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.  
 
 Based on licensing, this is Open Source and this and other Open Source tools are not supported directly by  
-<<<<<<< HEAD
 Arista Support. Support is best effort as it relates to extensions such as this one.  
-=======
-Arista Support. Support is best effort as it relates to extensions such as this one.
->>>>>>> 1.5
 
 # FILE STRUCTURE DETAIL:
 Most of the following detail can be ignored if you are installing toptalkers from the included RPM. The details below are included for those that may want to modify
