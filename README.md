@@ -235,12 +235,12 @@ Please test this extension on future releases of EOS **before** using this in pr
 specific target compiled binaries for these specific EOS releases and may change in the future.  
 Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.  
 
-If an sflow sample includes a non-front panel interface (such as a Port-channel, etc) the interface shown in the toptalker output will    
-usually be a large number. For example, 'interface port-channel 1' will typically be 1000001 and port-channel 2 will be 1000002.  
-This corresponds to the SNMP index of the interface. The native EOS sFlow agent uses this in the sFlow header and toptalkers is just  
-displaying what is sent in that header. To see which interface a particular index maps to you can use the command  
-'show snmp mib ifmib ifindex'. Additionally, if an interface is a routed port (i.e. 'no switchport') the VLAN field will show as 'N/A'  
-in the toptalker output.
+If an sflow sample includes a non-front panel interface (such as a Port-channel, etc) the interface shown in the toptalker  
+output will usually be a large number. For example, 'interface port-channel 1' will typically be 1000001 and port-channel 2  
+will be 1000002. This corresponds to the SNMP index of the interface. The native EOS sFlow agent uses this in the sFlow header  
+and toptalkers is just displaying what is sent in that header. To see which interface a particular index maps to you can use  
+the command 'show snmp mib ifmib ifindex'. Additionally, if an interface is a routed port (i.e. 'no switchport') the VLAN  
+field will show as 'N/A' in the toptalker output.
 
 Based on licensing, this is Open Source and this and other Open Source tools are not supported directly by  
 Arista Support. Support is best effort as it relates to extensions such as this one.  
