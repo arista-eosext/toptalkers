@@ -269,11 +269,11 @@ directory.
 Although pmacctd is not used with this extension, it was included with the RPM build for future use.
 
 
-**UPDATE - June 2021 -- Because of EOS CliPlugin changes, this extension has slightly changed to address these changes. The RPM will NOT install on EOS releases older than 4.22 
-and this branch is required for EOS 4.25 releases and newer.  
-Please use the 1.5.2 release for these older releases of EOS. The toptalkers 1.5.3 branch is for these newer EOS releases.
+**UPDATE - June 2021 -- Because of EOS CliPlugin changes, this extension has slightly changed to address these changes. The RPM will NOT install on EOS releases older than 4.22** 
+**and this branch is required for EOS 4.25 releases and newer.**  
+**Please use the 1.5.2 release for these older releases of EOS. The toptalkers 1.5.3 branch is for these newer EOS releases.**
  
-Additionally, you may consider using the newly added sampled flow tracking in EOS. Please see the EOS documentation
+**Additionally, you may consider using the newly added sampled flow tracking in EOS. Please see the EOS documentation
 for details at https://www.arista.com/en/um-eos/eos-sampled-flow-tracking**
 
 License
