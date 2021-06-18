@@ -232,7 +232,7 @@ If upgrading from a previous release:
 
 
 # LIMITATIONS:
-This release has been tested on EOS 4.20.1, 4.20.10, 4.20.12M, 4.21.2, 4.22.0F, 4.23.0, 4.24.0. 
+This release has been tested on EOS 4.22.4F, 4.23.0, 4.24.0 and 4.25.0. 
 Please test this extension on future releases of EOS **before** using this in production as this has  
 specific target compiled binaries for these specific EOS releases and may change in the future.  
 Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.  
@@ -269,8 +269,12 @@ directory.
 Although pmacctd is not used with this extension, it was included with the RPM build for future use.
 
 
-**UPDATE - June 2021 -- Because of EOS CliPlugin changes, this extension is NOT supported in EOS 4.25+. Please consider using the natively added EOS feature of
-sampled flow tracking. https://www.arista.com/en/um-eos/eos-sampled-flow-tracking**
+**UPDATE - June 2021 -- Because of EOS CliPlugin changes, this extension has slightly changed to address these changes. The RPM will NOT install on EOS releases older than 4.22 
+and this branch is required for EOS 4.25 releases and newer.  
+Please use the 1.5.2 release for these older releases of EOS. The toptalkers 1.5.3 branch is for these newer EOS releases.
+ 
+Additionally, you may consider using the newly added sampled flow tracking in EOS. Please see the EOS documentation
+for details at https://www.arista.com/en/um-eos/eos-sampled-flow-tracking**
 
 License
 =======

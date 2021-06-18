@@ -6,25 +6,24 @@
 #########################################################################################
 # Version 1.0.0  - 11/1/2018 - Jeremy Georges -- jgeorges@arista.com --  Initial Version
 # Version 1.4.0  - 12/27/2018 - J.Georges - Added additional exception handling.
+# Version 1.5.3  - 06/17/2021 - J.Georges - Change CLI registration with BasicCli.addShowCommandClass() 
 #########################################################################################
 #
 #
 import BasicCli
-import CliParser
 import sqlite3
 from prettytable import PrettyTable
 import sys
 import os
+import ShowCommand
+import CliMatcher
 
 # DB file and location
 DB = "/tmp/sampling.db"
 
+matcherAll = CliMatcher.KeywordMatcher( 'all', helpdesc='All toptalkers local samples' )
 
-#-------------------------------------------------------------------------------
-# The "show toptalkers [all]" command 
-#-------------------------------------------------------------------------------
-
-def showTopTalkers( mode, whatAll ):
+def doShowTopTalkers( mode, args ):
     # Check to make sure the file exists first. If it does not, then display error.
     # Perhaps someone deleted it?
     try:
@@ -50,7 +49,6 @@ def showTopTalkers( mode, whatAll ):
         sys.stdout.flush()
 
 
-
     query = '''SELECT ip_src as key, ip_dst, vlan, iface_in, SUM(bytes), SUM(packets), ip_proto, src_port, dst_port, tos
     from acct_v5
     GROUP by ip_src,ip_dst
@@ -69,11 +67,11 @@ def showTopTalkers( mode, whatAll ):
         conn.row_factory = sqlite3.Row
         db = conn.cursor()
 
-        # If whatall is set, then we have 'all' token used and we will not query with a limit.
-        if whatAll == None:
-            rows = db.execute(query).fetchall()
+        # If we have 'all' token used then we will not query with a limit.
+        if args.has_key('all'):
+            rows = db.execute(queryall).fetchall()
         else:
-            rows = db.execute(queryall).fetchall() 
+            rows = db.execute(query).fetchall() 
         if not rows:
             conn.commit()
     except sqlite3.Error as e:
@@ -104,14 +102,19 @@ def showTopTalkers( mode, whatAll ):
         else:
             table.add_row(x)
 
-    print table
+    print( table )
 
 
+#-------------------------------------------------------------------------------
+# The "show toptalkers [all]" command
+#-------------------------------------------------------------------------------
+class ShowCliTopTalkers( ShowCommand.ShowCliCommandClass ):
+   syntax = 'show toptalkers [ all ]'
+   data = {
+      'toptalkers': 'show toptalkers with local sflow sampling',
+      'all': matcherAll,
+   }
+   handler = staticmethod( doShowTopTalkers )
 
-
-tokenTopTalkers = CliParser.KeywordRule( 'toptalkers', helpdesc='show toptalkers with local sflow sampling' )
-tokenMax = CliParser.KeywordRule(
-   'all', helpdesc='Show all toptalkers' )
-
-BasicCli.registerShowCommand( tokenTopTalkers, [ '>>whatAll', tokenMax ], showTopTalkers )
+BasicCli.addShowCommandClass( ShowCliTopTalkers )
 
