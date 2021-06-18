@@ -166,7 +166,7 @@ AristaSwitch#extension toptalkers-1.5.0-1.i386.rpm
 AristaSwitch#show extensions 
 Name                                  Version/Release      Status      Extension
 ------------------------------------- -------------------- ----------- ---------
-toptalkers-1.4.0-1.i386.rpm           1.4.0/1              A, I        1        
+toptalkers-1.5.0-1.i386.rpm           1.5.0/1              A, I        1        
 
 A: available | NA: not available | I: installed | NI: not installed | F: forced
 ```
@@ -203,11 +203,13 @@ Its best to be conservative in your values if you choose to over ride the defaul
 
 
 
-To send sflow samples to the local collector, define the loopback as one of the sflow targets.
+To send sflow samples to the local collector, define the loopback (127.0.0.2)  as one of the sflow targets.
+The reason for using 127.0.0.2 instead of 127.0.0.1, is that recent TerminAttr releases have a built in sFlow collector.
+If we bind to the same socket, this creates a conflict with both TerminAttr and sfacctd/toptalkers. 
 ```
 !
 sflow sample 5000 #Whatever is appropriate for your use case 
-sflow destination 127.0.0.1
+sflow destination 127.0.0.2  
 sflow source-interface Vlan10 #Whatever is appropriate for your use case
 sflow run
 !
@@ -230,7 +232,7 @@ If upgrading from a previous release:
 
 
 # LIMITATIONS:
-This release has been tested on EOS 4.20.1, 4.20.10, 4.20.12M, 4.21.2, 4.22.0F.  
+This release has been tested on EOS 4.20.1, 4.20.10, 4.20.12M, 4.21.2, 4.22.0F, 4.23.0, 4.24.0. 
 Please test this extension on future releases of EOS **before** using this in production as this has  
 specific target compiled binaries for these specific EOS releases and may change in the future.  
 Also, this release has not been tested on MLAG or multi-supervisor platforms, nor with hardware-accelerated sFlow.  
@@ -266,7 +268,9 @@ directory.
 
 Although pmacctd is not used with this extension, it was included with the RPM build for future use.
 
-  
+
+**UPDATE - June 2021 -- Because of EOS CliPlugin changes, this extension is NOT supported in EOS 4.25+. Please consider using the natively added EOS feature of
+sampled flow tracking. https://www.arista.com/en/um-eos/eos-sampled-flow-tracking**
 
 License
 =======
